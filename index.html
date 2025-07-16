@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <meta property="og:title" content="台灣 2023 年全民普發現金 6000 元 ATM 裝設地點地圖" />
+        <meta property="og:description" content="ATM 領現 6000元 4 月 10 日開跑，開放領取時間一直到 10 月 31 日為止，全國 15 家金融機構超過 2.6 萬部 ATM 提款機，24 小時全天候提供民眾領取普發現金 6000 元，只要 ATM 機台張貼服務識別貼紙，就能插卡領取！" />
+        <meta property="og:locale" content="zh_TW" />
+        <meta property="og:type" content="website" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ol3/4.6.5/ol.css" type="text/css" />
+        <link rel="stylesheet" href="css/ol3-sidebar.min.css" type="text/css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.7/css/bootstrap.min.css" integrity="sha512-fw7f+TcMjTb7bpbLJZlP8g2Y4XcCyFZW8uy8HsRZsH/SwbMw0plKHFHr99DN3l04VsYNwvzicUX/6qurvIxbxw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/dark-hive/jquery-ui.min.css" integrity="sha512-gCFexX+67Pl9rPa75MMyEH2I5jbD5tqij8VBYcsLVwgVfVEdfon+9CEjVnXPtqoHLXjxrjMcyHLaee65dt/jxw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/dark-hive/theme.min.css" integrity="sha512-pN35/N51n1IeABlNGOSb5ltVKGbvUE8exTMhiB/4ijuy+UOYEWawQZzEs2yUvvCWopRO3uiRueeGnd/mQD0eTQ==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" href="css/automated-teller-machine-locations.css" type="text/css" />
+        <title>台灣 2023 年全民普發現金 6000 元 ATM 裝設地點地圖</title>
+    </head>
+    <body>
+        <div id="sidebar" class="sidebar collapsed">
+            <div class="sidebar-tabs">
+                <ul role="tablist">
+                    <li>
+                        <a href="#home" role="tab"><i class="fa-solid fa-bars"></i></a>
+                    </li>
+                    <li>
+                        <a href="#book" role="tab"><i class="fa-solid fa-book"></i></a>
+                    </li>
+                    <li>
+                        <a href="#settings" role="tab"><i class="fa-solid fa-gear"></i></a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/henryleeworld/js-taiwan-6000-cash-handouts-in-2023-automated-teller-machine-locations-map" role="tab" target="_blank"><i class="fa-brands fa-github"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="sidebar-content">
+                <div class="sidebar-pane" id="home">
+                    <h1 class="sidebar-header">
+                        <span id="sidebarTitle">請點選地圖中的點</span><span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                    </h1>
+                    <div id="sidebarContent"></div>
+                    <div class="btn-group-vertical" role="group" style="width: 100%;">
+                        <a href="https://github.com/henryleeworld/js-taiwan-6000-cash-handouts-in-2023-automated-teller-machine-locations-map/issues" target="_blank" class="btn btn-primary btn-lg btn-block">網站問題反應</a>
+                    </div>
+                </div>
+                <div class="sidebar-pane" id="book">
+                    <h1 class="sidebar-header">
+                        <span id="weekTitle">說明</span><span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                    </h1>
+                    <p>將本人/代領人提款卡插入 ATM 機臺後，輸入提款卡密碼，並輸入持卡人身分證統一編號及居留證統一證號及發放對象健保卡號，交易成功後領取現金 6,000 元。</p>
+                    <div>
+                        <a href="https://pro.6000.gov.tw/banklist.html" target="_blank"><img src="images/info.png" style="width: 100%;" /></a>
+                    </div>
+                </div>
+                <div class="sidebar-pane" id="settings">
+                    <h1 class="sidebar-header">
+                        <span id="weekTitle">設定</span><span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                    </h1>
+                    <div>
+                        <a href="#" class="btn btn-primary btn-lg btn-block" id="btn-geolocation">回到目前位置</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="map" class="sidebar-map"></div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.21/jquery.csv.min.js" integrity="sha512-Y8iWYJDo6HiTo5xtml1g4QqHtl/PO1w+dmUpQfQSOTqKNsMhExfyPN2ncNAe9JuJUSKzwK/b6oaNPop4MXzkwg==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+        <script src="js/routie.min.js" type="text/javascript" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/4.6.5/ol.js" type="text/javascript" defer></script>
+        <script src="js/ol5-sidebar.min.js" type="text/javascript" defer></script>
+        <script src="js/main.js" type="text/javascript" defer></script>
+    </body>
+</html>
